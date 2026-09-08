@@ -4,6 +4,7 @@ import { productListInclude } from "@/lib/product";
 import ProductGrid from "@/components/products/ProductGrid";
 import ProductFilters from "@/components/products/ProductFilters";
 import PageLinks from "@/components/common/PageLinks";
+import ShopVoltMark from "@/components/products/ShopVoltMark";
 
 export const metadata = {
   title: "All Products | Plugo",
@@ -59,6 +60,7 @@ export default async function ProductsPage({ searchParams }) {
 
   return (
     <div className="container-app py-10">
+      <ShopVoltMark />
       <div className="mb-8">
         <h1 className="font-display text-3xl font-bold text-ink-900">All Products</h1>
         <p className="text-slate-500 mt-1">
