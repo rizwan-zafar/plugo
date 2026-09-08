@@ -1,4 +1,5 @@
 import { getAdminSession } from "@/lib/auth";
+import { prisma } from "@/lib/db";
 import AdminShell from "@/components/admin/AdminShell";
 
 export const metadata = {
@@ -8,5 +9,17 @@ export const metadata = {
 
 export default async function AdminLayout({ children }) {
   const session = await getAdminSession();
-  return <AdminShell admin={session}>{children}</AdminShell>;
+  let unread = 0;
+  let pending = 0;
+  if (session) {
+    [unread, pending] = await Promise.all([
+      prisma.contactMessage.count({ where: { isRead: false } }),
+      prisma.order.count({ where: { status: "PENDING" } }),
+    ]);
+  }
+  return (
+    <AdminShell admin={session} unread={unread} pending={pending}>
+      {children}
+    </AdminShell>
+  );
 }

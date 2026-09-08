@@ -94,11 +94,7 @@ export default function AdminProductsPage() {
 
   return (
     <div>
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-        <div>
-          <h1 className="font-display text-2xl font-bold text-stone-800">Products</h1>
-          <p className="text-stone-500">Manage your product catalog</p>
-        </div>
+      <div className="flex items-center justify-end mb-6">
         <Button as={Link} href="/admin/products/new">+ Add Product</Button>
       </div>
 

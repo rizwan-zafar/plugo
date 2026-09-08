@@ -41,14 +41,16 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-ink-950 p-4">
-      <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-2xl">
+    <div className="relative min-h-screen flex items-center justify-center bg-ink-950 p-4 overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(700px_300px_at_70%_0%,rgba(34,211,238,0.22),transparent_55%)]" />
+      <div className="relative w-full max-w-md rounded-3xl bg-white p-8 shadow-[0_30px_80px_rgba(0,0,0,0.35)]">
         <div className="text-center mb-8">
           <div className="flex justify-center mb-4">
             <BrandMark />
           </div>
-          <h1 className="font-display text-2xl font-bold text-ink-900">Admin</h1>
-          <p className="text-slate-500 text-sm mt-1">Sign in to manage Plugo</p>
+          <p className="text-[10px] font-extrabold tracking-[0.2em] uppercase text-brand-600 mb-2">Control room</p>
+          <h1 className="font-display text-2xl font-bold text-ink-900">Sign in to Plugo</h1>
+          <p className="text-slate-500 text-sm mt-1">Manage catalog, COD orders, and messages</p>
         </div>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">

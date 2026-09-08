@@ -67,11 +67,7 @@ export default function AdminBlogsPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h1 className="font-display text-2xl font-bold text-stone-800">Blog Posts</h1>
-          <p className="text-stone-500">Manage your blog content</p>
-        </div>
+      <div className="flex items-center justify-end mb-6">
         <Button as={Link} href="/admin/blogs/new">+ Add Post</Button>
       </div>
 

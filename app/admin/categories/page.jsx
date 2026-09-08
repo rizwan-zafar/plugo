@@ -111,11 +111,7 @@ export default function AdminCategoriesPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h1 className="font-display text-2xl font-bold text-stone-800">Categories</h1>
-          <p className="text-stone-500">Manage your product categories</p>
-        </div>
+      <div className="flex items-center justify-end mb-6">
         <Button onClick={openCreate}>+ Add Category</Button>
       </div>
 

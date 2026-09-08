@@ -2,6 +2,7 @@
 
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { useState, useTransition } from "react";
+import FilterSelect from "./FilterSelect";
 
 export default function ProductFilters({ categories }) {
   const router = useRouter();
@@ -28,49 +29,49 @@ export default function ProductFilters({ categories }) {
     updateParam("search", search.trim());
   };
 
+  const categoryOptions = [
+    { value: "", label: "All categories" },
+    ...categories.map((category) => ({ value: category.slug, label: category.name })),
+  ];
+
+  const sortOptions = [
+    { value: "newest", label: "Newest" },
+    { value: "price_asc", label: "Price: low to high" },
+    { value: "price_desc", label: "Price: high to low" },
+    { value: "name", label: "Name: A–Z" },
+  ];
+
   return (
-    <div className="flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between mb-8">
-      <form onSubmit={handleSearchSubmit} className="flex w-full sm:max-w-xs">
+    <div className="shop-toolbar">
+      <form onSubmit={handleSearchSubmit} className="shop-search">
         <input
           type="search"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search cables, chargers, earbuds..."
-          className="w-full rounded-l-full border border-stone-300 px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-brand-400 focus:border-brand-400"
+          className="shop-search-input"
         />
-        <button
-          type="submit"
-          className="rounded-r-full bg-brand-500 px-4 text-white hover:bg-brand-600 transition-colors"
-          aria-label="Search"
-        >
-          🔍
+        <button type="submit" className="shop-search-btn" aria-label="Search">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <circle cx="11" cy="11" r="7" />
+            <path strokeLinecap="round" d="m20 20-3-3" />
+          </svg>
         </button>
       </form>
 
-      <div className="flex flex-wrap gap-2 items-center">
-        <select
+      <div className="shop-filter-row">
+        <FilterSelect
+          label="Category"
           value={searchParams.get("category") || ""}
-          onChange={(e) => updateParam("category", e.target.value)}
-          className="rounded-full border border-stone-300 px-4 py-2.5 text-sm bg-white outline-none focus:ring-2 focus:ring-brand-400"
-        >
-          <option value="">All Categories</option>
-          {categories.map((cat) => (
-            <option key={cat.id} value={cat.slug}>
-              {cat.name}
-            </option>
-          ))}
-        </select>
-
-        <select
+          options={categoryOptions}
+          onChange={(value) => updateParam("category", value)}
+        />
+        <FilterSelect
+          label="Sort"
           value={searchParams.get("sort") || "newest"}
-          onChange={(e) => updateParam("sort", e.target.value)}
-          className="rounded-full border border-stone-300 px-4 py-2.5 text-sm bg-white outline-none focus:ring-2 focus:ring-brand-400"
-        >
-          <option value="newest">Newest</option>
-          <option value="price_asc">Price: Low to High</option>
-          <option value="price_desc">Price: High to Low</option>
-          <option value="name">Name: A-Z</option>
-        </select>
+          options={sortOptions}
+          onChange={(value) => updateParam("sort", value)}
+        />
       </div>
     </div>
   );

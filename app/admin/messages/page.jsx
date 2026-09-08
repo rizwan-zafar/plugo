@@ -76,11 +76,7 @@ export default function AdminMessagesPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h1 className="font-display text-2xl font-bold text-stone-800">Contact Messages</h1>
-          <p className="text-stone-500">Messages submitted through the contact form</p>
-        </div>
+      <div className="flex items-center justify-end mb-6">
         <select
           value={filter}
           onChange={(e) => setFilter(e.target.value)}

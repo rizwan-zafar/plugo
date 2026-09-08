@@ -42,10 +42,7 @@ export default function AdminOrdersPage() {
 
   return (
     <div>
-      <div className="mb-6">
-        <h1 className="font-display text-2xl font-bold text-stone-800">Orders</h1>
-        <p className="text-stone-500">Manage and track customer orders</p>
-      </div>
+      <div className="mb-5" />
 
       <div className="flex flex-col sm:flex-row gap-3 mb-5">
         <input
