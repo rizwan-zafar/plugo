@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b1220" />
+      <stop offset="100%" stop-color="#22d3ee" />
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="600" height="600" fill="url(#g)" />
+  <rect width="600" height="600" fill="url(#grid)" />
+  <circle cx="470" cy="110" r="170" fill="rgba(34,211,238,0.18)" />
+  <circle cx="300" cy="240" r="120" fill="rgba(255,255,255,0.08)" />
+  <text x="300" y="268" font-size="84" text-anchor="middle" font-family="Arial, sans-serif">🎙️</text>
+  <foreignObject x="40" y="420" width="520" height="140">
+    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Arial, sans-serif; color:#ffffff; font-size:30px; font-weight:700; text-align:center; line-height:1.25; text-shadow: 0 2px 10px rgba(0,0,0,0.45);">
+      3.5mm Handsfree
+    </div>
+  </foreignObject>
+</svg>
