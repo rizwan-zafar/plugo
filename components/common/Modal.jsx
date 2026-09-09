@@ -23,12 +23,12 @@ export default function Modal({ open, onClose, title, children, footer }) {
         onClick={onClose}
         aria-hidden="true"
       />
-      <div className="relative w-full max-w-lg rounded-2xl bg-white shadow-2xl animate-fade-in max-h-[90vh] flex flex-col">
-        <div className="flex items-center justify-between border-b border-stone-100 px-5 py-4">
-          <h3 className="text-lg font-semibold text-stone-800">{title}</h3>
+      <div className="relative w-full max-w-lg rounded-3xl bg-white shadow-[0_24px_60px_rgba(15,23,42,0.2)] animate-fade-in max-h-[90vh] flex flex-col">
+        <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4">
+          <h3 className="font-display text-lg font-extrabold text-ink-900">{title}</h3>
           <button
             onClick={onClose}
-            className="text-stone-400 hover:text-stone-700 text-xl leading-none"
+            className="text-slate-400 hover:text-ink-900 text-xl leading-none"
             aria-label="Close"
           >
             ✕

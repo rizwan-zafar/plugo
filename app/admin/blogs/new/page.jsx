@@ -3,12 +3,11 @@ import BlogForm from "@/components/admin/BlogForm";
 
 export default function NewBlogPage() {
   return (
-    <div>
-      <div className="mb-6">
-        <Link href="/admin/blogs" className="text-sm text-brand-600 hover:text-brand-700">
-          ← Back to Blog Posts
-        </Link>
-        <h1 className="font-display text-2xl font-bold text-stone-800 mt-2">Add Blog Post</h1>
+    <div className="admin-desk">
+      <div>
+        <Link href="/admin/blogs" className="admin-back">← Back to guides</Link>
+        <p className="admin-kicker">Field notes</p>
+        <h2 className="admin-top-title">Add guide</h2>
       </div>
       <BlogForm />
     </div>

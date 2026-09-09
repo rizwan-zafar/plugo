@@ -3,12 +3,11 @@ import ProductForm from "@/components/admin/ProductForm";
 
 export default function NewProductPage() {
   return (
-    <div>
-      <div className="mb-6">
-        <Link href="/admin/products" className="text-sm text-brand-600 hover:text-brand-700">
-          ← Back to Products
-        </Link>
-        <h1 className="font-display text-2xl font-bold text-stone-800 mt-2">Add Product</h1>
+    <div className="admin-desk">
+      <div>
+        <Link href="/admin/products" className="admin-back">← Back to products</Link>
+        <p className="admin-kicker">Catalog</p>
+        <h2 className="admin-top-title">Add product</h2>
       </div>
       <ProductForm />
     </div>

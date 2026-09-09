@@ -93,108 +93,109 @@ export default function AdminProductsPage() {
   };
 
   return (
-    <div>
-      <div className="flex items-center justify-end mb-6">
-        <Button as={Link} href="/admin/products/new">+ Add Product</Button>
+    <div className="admin-desk">
+      <div className="admin-toolbar">
+        <div className="admin-toolbar-fields">
+          <input
+            value={search}
+            onChange={(e) => {
+              setPage(1);
+              setSearch(e.target.value);
+            }}
+            placeholder="Search accessories..."
+            className="admin-field"
+          />
+          <select
+            value={category}
+            onChange={(e) => {
+              setPage(1);
+              setCategory(e.target.value);
+            }}
+            className="admin-field-sm"
+          >
+            <option value="">All categories</option>
+            {categories.map((cat) => (
+              <option key={cat.id} value={cat.slug}>{cat.name}</option>
+            ))}
+          </select>
+        </div>
+        <Link href="/admin/products/new" className="admin-btn-primary">
+          Add product
+        </Link>
       </div>
 
-      <div className="flex flex-col sm:flex-row gap-3 mb-5">
-        <input
-          value={search}
-          onChange={(e) => {
-            setPage(1);
-            setSearch(e.target.value);
-          }}
-          placeholder="Search products..."
-          className="w-full sm:max-w-xs rounded-lg border border-stone-300 px-3.5 py-2.5 text-sm outline-none focus:ring-2 focus:ring-brand-400"
-        />
-        <select
-          value={category}
-          onChange={(e) => {
-            setPage(1);
-            setCategory(e.target.value);
-          }}
-          className="rounded-lg border border-stone-300 px-3.5 py-2.5 text-sm bg-white outline-none focus:ring-2 focus:ring-brand-400"
-        >
-          <option value="">All Categories</option>
-          {categories.map((cat) => (
-            <option key={cat.id} value={cat.slug}>{cat.name}</option>
-          ))}
-        </select>
-      </div>
-
-      {loading ? (
-        <Spinner />
-      ) : products.length === 0 ? (
-        <EmptyState icon="⚡" title="No products found" description="Try adjusting your search or add a new product." action={<Button as={Link} href="/admin/products/new">+ Add Product</Button>} />
-      ) : (
-        <>
-          <Table columns={["Image", "Name", "Category", "Price", "Stock", "Status", "Actions"]}>
-            {products.map((product) => {
-              const pricing = listPrice(product);
-              return (
-              <tr key={product.id}>
-                <td className="px-4 py-3">
-                  <div className="h-12 w-12 rounded-lg overflow-hidden bg-stone-100 flex items-center justify-center">
-                    {product.images?.[0] ? (
-                      <img src={product.images[0]} alt={product.name} className="h-full w-full object-cover" />
-                    ) : (
-                      <span className="text-xl">⚡</span>
-                    )}
-                  </div>
-                </td>
-                <td className="px-4 py-3 font-medium text-stone-800 max-w-xs">
-                  <span className="line-clamp-1">{product.name}</span>
-                  {product.variants?.length > 1 && (
-                    <span className="block text-xs text-stone-400 mt-0.5">
-                      {product.variants.length} variations
-                    </span>
-                  )}
-                </td>
-                <td className="px-4 py-3 text-stone-600">{product.category?.name}</td>
-                <td className="px-4 py-3 text-stone-700">
-                  <span className="inline-flex flex-col">
-                    <span>
-                      {pricing.hasMultiple ? "From " : ""}
-                      {formatCurrency(pricing.price)}
-                    </span>
-                    {pricing.onSale && (
-                      <span className="text-xs text-stone-400 line-through">{formatCurrency(pricing.compareAt)}</span>
-                    )}
-                  </span>
-                </td>
-                <td className="px-4 py-3">
-                  <span className={product.stock <= 5 ? "text-red-600 font-semibold" : "text-stone-700"}>
-                    {product.stock}
-                  </span>
-                </td>
-                <td className="px-4 py-3">
-                  <button
-                    onClick={() => toggleStatus(product)}
-                    className={`rounded-full px-2.5 py-1 text-xs font-semibold transition ${
-                      product.status === "ACTIVE" ? "bg-green-100 text-green-700 hover:bg-green-200" : "bg-stone-200 text-stone-600 hover:bg-stone-300"
-                    }`}
-                  >
-                    {product.status}
-                  </button>
-                </td>
-                <td className="px-4 py-3">
-                  <div className="flex gap-2">
-                    <Link href={`/admin/products/${product.id}/edit`} className="text-sm font-medium text-brand-600 hover:text-brand-800">
-                      Edit
-                    </Link>
-                    <button onClick={() => handleDelete(product)} className="text-sm font-medium text-red-500 hover:text-red-700">
-                      Delete
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              );
-            })}
-          </Table>
-          <Pagination page={page} totalPages={totalPages} onChange={setPage} />
-        </>
-      )}
+      <section className="admin-panel">
+        {loading ? (
+          <Spinner />
+        ) : products.length === 0 ? (
+          <div className="admin-empty">
+            <EmptyState icon="⚡" title="No products found" description="Try adjusting your search or add a new accessory." action={<Button as={Link} href="/admin/products/new">Add product</Button>} />
+          </div>
+        ) : (
+          <>
+            <Table columns={["Image", "Name", "Category", "Price", "Stock", "Status", "Actions"]}>
+              {products.map((product) => {
+                const pricing = listPrice(product);
+                return (
+                  <tr key={product.id}>
+                    <td>
+                      <div className="admin-thumb">
+                        {product.images?.[0] ? (
+                          <img src={product.images[0]} alt={product.name} />
+                        ) : (
+                          <span>⚡</span>
+                        )}
+                      </div>
+                    </td>
+                    <td>
+                      <span className="font-semibold text-ink-900 line-clamp-1">{product.name}</span>
+                      {product.variants?.length > 1 && (
+                        <span className="block text-xs text-slate-400 mt-0.5">
+                          {product.variants.length} variations
+                        </span>
+                      )}
+                    </td>
+                    <td>{product.category?.name}</td>
+                    <td>
+                      <span className="inline-flex flex-col">
+                        <span>
+                          {pricing.hasMultiple ? "From " : ""}
+                          {formatCurrency(pricing.price)}
+                        </span>
+                        {pricing.onSale && (
+                          <span className="text-xs text-slate-400 line-through">{formatCurrency(pricing.compareAt)}</span>
+                        )}
+                      </span>
+                    </td>
+                    <td>
+                      <span className={product.stock <= 5 ? "font-semibold text-red-600" : ""}>
+                        {product.stock}
+                      </span>
+                    </td>
+                    <td>
+                      <button
+                        onClick={() => toggleStatus(product)}
+                        className={`admin-status ${
+                          product.status === "ACTIVE" ? "bg-green-100 text-green-700" : "bg-slate-200 text-slate-600"
+                        }`}
+                      >
+                        {product.status}
+                      </button>
+                    </td>
+                    <td>
+                      <div className="flex gap-3">
+                        <Link href={`/admin/products/${product.id}/edit`} className="admin-link">Edit</Link>
+                        <button onClick={() => handleDelete(product)} className="admin-danger">Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
+            </Table>
+            <Pagination page={page} totalPages={totalPages} onChange={setPage} />
+          </>
+        )}
+      </section>
     </div>
   );
 }

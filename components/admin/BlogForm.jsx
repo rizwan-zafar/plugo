@@ -58,7 +58,7 @@ export default function BlogForm({ blog }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="rounded-2xl bg-white border border-stone-200 p-6 flex flex-col gap-5 max-w-2xl">
+    <form onSubmit={handleSubmit} className="admin-form">
       <Input label="Title" value={form.title} onChange={handleChange("title")} error={errors.title} required />
       <Input label="Author" value={form.author} onChange={handleChange("author")} error={errors.author} required />
       <ImageUploader label="Featured Image" value={form.featuredImage} onChange={(url) => setForm((f) => ({ ...f, featuredImage: url }))} />
@@ -68,7 +68,7 @@ export default function BlogForm({ blog }) {
         <option value="PUBLISHED">Published</option>
       </Select>
 
-      <div className="flex justify-end gap-3 pt-2 border-t border-stone-100 mt-2">
+      <div className="flex justify-end gap-3 pt-2 border-t border-slate-100 mt-2">
         <Button type="button" variant="secondary" onClick={() => router.push("/admin/blogs")}>
           Cancel
         </Button>

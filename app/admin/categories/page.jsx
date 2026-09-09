@@ -110,57 +110,50 @@ export default function AdminCategoriesPage() {
   };
 
   return (
-    <div>
-      <div className="flex items-center justify-end mb-6">
-        <Button onClick={openCreate}>+ Add Category</Button>
+    <div className="admin-desk">
+      <div className="admin-toolbar">
+        <p className="admin-muted">Five boards for the shop. Keep names short and photos real.</p>
+        <Button onClick={openCreate}>Add category</Button>
       </div>
 
-      {loading ? (
-        <Spinner />
-      ) : categories.length === 0 ? (
-        <EmptyState icon="🗂️" title="No categories yet" description="Create your first category to get started." action={<Button onClick={openCreate}>+ Add Category</Button>} />
-      ) : (
-        <Table columns={["Image", "Name", "Products", "Status", "Created", "Actions"]}>
-          {categories.map((cat) => (
-            <tr key={cat.id}>
-              <td className="px-4 py-3">
-                <div className="h-12 w-12 rounded-lg overflow-hidden bg-stone-100 flex items-center justify-center">
-                  {cat.image ? (
-                    <img src={cat.image} alt={cat.name} className="h-full w-full object-cover" />
-                  ) : (
-                    <span className="text-xl">⚡</span>
-                  )}
-                </div>
-              </td>
-              <td className="px-4 py-3">
-                <p className="font-medium text-stone-800">{cat.name}</p>
-                <p className="text-xs text-stone-500 line-clamp-1 max-w-xs">{cat.description}</p>
-              </td>
-              <td className="px-4 py-3 text-stone-600">{cat._count?.products ?? 0}</td>
-              <td className="px-4 py-3">
-                <span
-                  className={`rounded-full px-2.5 py-1 text-xs font-semibold ${
-                    cat.status === "ACTIVE" ? "bg-green-100 text-green-700" : "bg-stone-200 text-stone-600"
-                  }`}
-                >
-                  {cat.status}
-                </span>
-              </td>
-              <td className="px-4 py-3 text-stone-500">{formatDate(cat.createdAt)}</td>
-              <td className="px-4 py-3">
-                <div className="flex gap-2">
-                  <button onClick={() => openEdit(cat)} className="text-sm font-medium text-brand-600 hover:text-brand-800">
-                    Edit
-                  </button>
-                  <button onClick={() => handleDelete(cat)} className="text-sm font-medium text-red-500 hover:text-red-700">
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
-          ))}
-        </Table>
-      )}
+      <section className="admin-panel">
+        {loading ? (
+          <Spinner />
+        ) : categories.length === 0 ? (
+          <div className="admin-empty">
+            <EmptyState icon="🗂️" title="No categories yet" description="Create your first board to start the catalog." action={<Button onClick={openCreate}>Add category</Button>} />
+          </div>
+        ) : (
+          <Table columns={["Image", "Name", "Products", "Status", "Created", "Actions"]}>
+            {categories.map((cat) => (
+              <tr key={cat.id}>
+                <td>
+                  <div className="admin-thumb">
+                    {cat.image ? <img src={cat.image} alt={cat.name} /> : <span>⚡</span>}
+                  </div>
+                </td>
+                <td>
+                  <p className="font-semibold text-ink-900">{cat.name}</p>
+                  <p className="text-xs text-slate-500 line-clamp-1 max-w-xs">{cat.description}</p>
+                </td>
+                <td>{cat._count?.products ?? 0}</td>
+                <td>
+                  <span className={`admin-status ${cat.status === "ACTIVE" ? "bg-green-100 text-green-700" : "bg-slate-200 text-slate-600"}`}>
+                    {cat.status}
+                  </span>
+                </td>
+                <td className="admin-muted">{formatDate(cat.createdAt)}</td>
+                <td>
+                  <div className="flex gap-3">
+                    <button onClick={() => openEdit(cat)} className="admin-link">Edit</button>
+                    <button onClick={() => handleDelete(cat)} className="admin-danger">Delete</button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </Table>
+        )}
+      </section>
 
       <Modal
         open={modalOpen}

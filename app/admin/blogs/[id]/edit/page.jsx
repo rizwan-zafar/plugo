@@ -10,12 +10,11 @@ export default async function EditBlogPage({ params }) {
   if (!blog) notFound();
 
   return (
-    <div>
-      <div className="mb-6">
-        <Link href="/admin/blogs" className="text-sm text-brand-600 hover:text-brand-700">
-          ← Back to Blog Posts
-        </Link>
-        <h1 className="font-display text-2xl font-bold text-stone-800 mt-2">Edit Blog Post</h1>
+    <div className="admin-desk">
+      <div>
+        <Link href="/admin/blogs" className="admin-back">← Back to guides</Link>
+        <p className="admin-kicker">Field notes</p>
+        <h2 className="admin-top-title">Edit guide</h2>
       </div>
       <BlogForm blog={toPlain(blog)} />
     </div>

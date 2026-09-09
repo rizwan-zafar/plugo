@@ -75,46 +75,51 @@ export default function AdminMessagesPage() {
   };
 
   return (
-    <div>
-      <div className="flex items-center justify-end mb-6">
+    <div className="admin-desk">
+      <div className="admin-toolbar">
+        <p className="admin-muted">Inbox from the contact form.</p>
         <select
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
-          className="rounded-lg border border-stone-300 px-3.5 py-2.5 text-sm bg-white outline-none focus:ring-2 focus:ring-brand-400"
+          className="admin-field-sm"
         >
-          <option value="all">All Messages</option>
+          <option value="all">All messages</option>
           <option value="unread">Unread</option>
           <option value="read">Read</option>
         </select>
       </div>
 
-      {loading ? (
-        <Spinner />
-      ) : messages.length === 0 ? (
-        <EmptyState icon="✉️" title="No messages" description="Contact form submissions will appear here." />
-      ) : (
-        <div className="rounded-2xl bg-white border border-stone-200 divide-y divide-stone-100">
-          {messages.map((message) => (
-            <button
-              key={message.id}
-              onClick={() => openMessage(message)}
-              className="w-full text-left flex items-center gap-4 px-5 py-4 hover:bg-stone-50 transition-colors"
-            >
-              <span className={`h-2.5 w-2.5 rounded-full flex-shrink-0 ${message.isRead ? "bg-stone-200" : "bg-brand-500"}`} />
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center justify-between gap-3">
-                  <p className={`truncate ${message.isRead ? "font-medium text-stone-600" : "font-semibold text-stone-900"}`}>
-                    {message.name}
-                    {message.subject && <span className="text-stone-400 font-normal"> — {message.subject}</span>}
-                  </p>
-                  <span className="text-xs text-stone-400 whitespace-nowrap">{formatDateTime(message.createdAt)}</span>
+      <section className="admin-panel">
+        {loading ? (
+          <Spinner />
+        ) : messages.length === 0 ? (
+          <div className="admin-empty">
+            <EmptyState icon="✉️" title="No messages" description="Contact form submissions will appear here." />
+          </div>
+        ) : (
+          <div>
+            {messages.map((message) => (
+              <button
+                key={message.id}
+                onClick={() => openMessage(message)}
+                className="admin-inbox-row"
+              >
+                <span className={`admin-dot${message.isRead ? " is-read" : ""}`} />
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center justify-between gap-3">
+                    <p className={`truncate ${message.isRead ? "font-medium text-slate-500" : "font-semibold text-ink-900"}`}>
+                      {message.name}
+                      {message.subject && <span className="text-slate-400 font-normal"> — {message.subject}</span>}
+                    </p>
+                    <span className="admin-muted whitespace-nowrap">{formatDateTime(message.createdAt)}</span>
+                  </div>
+                  <p className="text-sm text-slate-500 truncate">{message.message}</p>
                 </div>
-                <p className="text-sm text-stone-500 truncate">{message.message}</p>
-              </div>
-            </button>
-          ))}
-        </div>
-      )}
+              </button>
+            ))}
+          </div>
+        )}
+      </section>
 
       <Modal open={Boolean(selected)} onClose={() => setSelected(null)} title="Message Details">
         {selected && (
@@ -150,17 +155,11 @@ export default function AdminMessagesPage() {
               <p className="text-stone-700 whitespace-pre-line">{selected.message}</p>
             </div>
 
-            <div className="flex justify-end gap-3 pt-3 border-t border-stone-100">
-              <button
-                onClick={() => toggleRead(selected)}
-                className="text-sm font-medium text-brand-600 hover:text-brand-800"
-              >
+            <div className="flex justify-end gap-4 pt-3 border-t border-slate-100">
+              <button onClick={() => toggleRead(selected)} className="admin-link">
                 Mark as {selected.isRead ? "Unread" : "Read"}
               </button>
-              <button
-                onClick={() => handleDelete(selected)}
-                className="text-sm font-medium text-red-500 hover:text-red-700"
-              >
+              <button onClick={() => handleDelete(selected)} className="admin-danger">
                 Delete
               </button>
             </div>

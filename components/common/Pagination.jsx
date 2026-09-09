@@ -8,11 +8,11 @@ export default function Pagination({ page, totalPages, onChange }) {
   let lastRendered = 0;
 
   return (
-    <div className="flex items-center justify-center gap-1 py-6">
+    <div className="flex items-center justify-center gap-1 py-5">
       <button
         onClick={() => onChange(Math.max(1, page - 1))}
         disabled={page === 1}
-        className="rounded-lg px-3 py-2 text-sm font-medium text-stone-600 hover:bg-brand-50 disabled:opacity-40 disabled:hover:bg-transparent"
+        className="rounded-xl px-3 py-2 text-sm font-medium text-slate-600 hover:bg-cyan-50 disabled:opacity-40 disabled:hover:bg-transparent"
       >
         ← Prev
       </button>
@@ -21,13 +21,13 @@ export default function Pagination({ page, totalPages, onChange }) {
         lastRendered = p;
         return (
           <span key={p} className="flex items-center">
-            {showEllipsis && <span className="px-1 text-stone-400">…</span>}
+            {showEllipsis && <span className="px-1 text-slate-400">…</span>}
             <button
               onClick={() => onChange(p)}
-              className={`h-9 w-9 rounded-lg text-sm font-medium transition ${
+              className={`h-9 w-9 rounded-xl text-sm font-medium transition ${
                 p === page
-                  ? "bg-brand-500 text-white"
-                  : "text-stone-600 hover:bg-brand-50"
+                  ? "bg-ink-900 text-white"
+                  : "text-slate-600 hover:bg-cyan-50"
               }`}
             >
               {p}
@@ -38,7 +38,7 @@ export default function Pagination({ page, totalPages, onChange }) {
       <button
         onClick={() => onChange(Math.min(totalPages, page + 1))}
         disabled={page === totalPages}
-        className="rounded-lg px-3 py-2 text-sm font-medium text-stone-600 hover:bg-brand-50 disabled:opacity-40 disabled:hover:bg-transparent"
+        className="rounded-xl px-3 py-2 text-sm font-medium text-slate-600 hover:bg-cyan-50 disabled:opacity-40 disabled:hover:bg-transparent"
       >
         Next →
       </button>

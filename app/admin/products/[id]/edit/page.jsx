@@ -13,12 +13,11 @@ export default async function EditProductPage({ params }) {
   if (!product) notFound();
 
   return (
-    <div>
-      <div className="mb-6">
-        <Link href="/admin/products" className="text-sm text-brand-600 hover:text-brand-700">
-          ← Back to Products
-        </Link>
-        <h1 className="font-display text-2xl font-bold text-stone-800 mt-2">Edit Product</h1>
+    <div className="admin-desk">
+      <div>
+        <Link href="/admin/products" className="admin-back">← Back to products</Link>
+        <p className="admin-kicker">Catalog</p>
+        <h2 className="admin-top-title">Edit product</h2>
       </div>
       <ProductForm product={toPlain(product)} />
     </div>

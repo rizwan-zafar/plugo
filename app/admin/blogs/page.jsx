@@ -66,48 +66,49 @@ export default function AdminBlogsPage() {
   };
 
   return (
-    <div>
-      <div className="flex items-center justify-end mb-6">
-        <Button as={Link} href="/admin/blogs/new">+ Add Post</Button>
+    <div className="admin-desk">
+      <div className="admin-toolbar">
+        <p className="admin-muted">Field notes for cables, watts, and earbuds.</p>
+        <Link href="/admin/blogs/new" className="admin-btn-primary">Add guide</Link>
       </div>
 
-      {loading ? (
-        <Spinner />
-      ) : blogs.length === 0 ? (
-        <EmptyState icon="📰" title="No blog posts yet" description="Write your first post to engage your customers." action={<Button as={Link} href="/admin/blogs/new">+ Add Post</Button>} />
-      ) : (
-        <Table columns={["Title", "Author", "Status", "Date", "Actions"]}>
-          {blogs.map((blog) => (
-            <tr key={blog.id}>
-              <td className="px-4 py-3 font-medium text-stone-800 max-w-sm">
-                <span className="line-clamp-1">{blog.title}</span>
-              </td>
-              <td className="px-4 py-3 text-stone-600">{blog.author}</td>
-              <td className="px-4 py-3">
-                <button
-                  onClick={() => togglePublish(blog)}
-                  className={`rounded-full px-2.5 py-1 text-xs font-semibold transition ${
-                    blog.status === "PUBLISHED" ? "bg-green-100 text-green-700 hover:bg-green-200" : "bg-amber-100 text-amber-700 hover:bg-amber-200"
-                  }`}
-                >
-                  {blog.status}
-                </button>
-              </td>
-              <td className="px-4 py-3 text-stone-500">{formatDate(blog.createdAt)}</td>
-              <td className="px-4 py-3">
-                <div className="flex gap-2">
-                  <Link href={`/admin/blogs/${blog.id}/edit`} className="text-sm font-medium text-brand-600 hover:text-brand-800">
-                    Edit
-                  </Link>
-                  <button onClick={() => handleDelete(blog)} className="text-sm font-medium text-red-500 hover:text-red-700">
-                    Delete
+      <section className="admin-panel">
+        {loading ? (
+          <Spinner />
+        ) : blogs.length === 0 ? (
+          <div className="admin-empty">
+            <EmptyState icon="📰" title="No guides yet" description="Write the first field note for the storefront." action={<Button as={Link} href="/admin/blogs/new">Add guide</Button>} />
+          </div>
+        ) : (
+          <Table columns={["Title", "Author", "Status", "Date", "Actions"]}>
+            {blogs.map((blog) => (
+              <tr key={blog.id}>
+                <td>
+                  <span className="font-semibold text-ink-900 line-clamp-1">{blog.title}</span>
+                </td>
+                <td>{blog.author}</td>
+                <td>
+                  <button
+                    onClick={() => togglePublish(blog)}
+                    className={`admin-status ${
+                      blog.status === "PUBLISHED" ? "bg-green-100 text-green-700" : "bg-amber-100 text-amber-700"
+                    }`}
+                  >
+                    {blog.status}
                   </button>
-                </div>
-              </td>
-            </tr>
-          ))}
-        </Table>
-      )}
+                </td>
+                <td className="admin-muted">{formatDate(blog.createdAt)}</td>
+                <td>
+                  <div className="flex gap-3">
+                    <Link href={`/admin/blogs/${blog.id}/edit`} className="admin-link">Edit</Link>
+                    <button onClick={() => handleDelete(blog)} className="admin-danger">Delete</button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </Table>
+        )}
+      </section>
     </div>
   );
 }

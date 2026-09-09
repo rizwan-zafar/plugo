@@ -117,7 +117,7 @@ export default function ProductForm({ product }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="rounded-2xl bg-white border border-stone-200 p-6 flex flex-col gap-5 max-w-2xl">
+    <form onSubmit={handleSubmit} className="admin-form">
       <Input label="Product Name" value={form.name} onChange={handleChange("name")} error={errors.name} required />
       <Textarea label="Description" rows={4} value={form.description} onChange={handleChange("description")} />
 
@@ -139,9 +139,9 @@ export default function ProductForm({ product }) {
       <div>
         <div className="flex items-center justify-between mb-2">
           <div>
-            <p className="text-sm font-medium text-stone-700">Variations</p>
-            <p className="text-xs text-stone-500 mt-0.5">
-              Pack sizes or piece counts, each with its own price and stock. Add an original price to show a discount.
+            <p className="text-sm font-medium text-ink-900">Variations</p>
+            <p className="text-xs text-slate-500 mt-0.5">
+              Length, color, or pack — each with its own price and stock. Add an original price to show a sale.
             </p>
           </div>
           <Button type="button" variant="secondary" onClick={addVariant}>
@@ -151,7 +151,7 @@ export default function ProductForm({ product }) {
         {errors.variants && <p className="text-sm text-red-600 mb-2">{errors.variants}</p>}
         <div className="flex flex-col gap-3">
           {form.variants.map((variant, index) => (
-            <div key={variant.id || `new-${index}`} className="rounded-xl border border-stone-200 bg-stone-50 p-3">
+            <div key={variant.id || `new-${index}`} className="admin-variant">
               <div className="grid grid-cols-1 sm:grid-cols-12 gap-3 items-end">
                 <div className="sm:col-span-5">
                   <Input
@@ -216,7 +216,7 @@ export default function ProductForm({ product }) {
 
       <ImageUploader label="Product Image" value={form.image} onChange={(url) => setForm((f) => ({ ...f, image: url }))} />
 
-      <div className="flex justify-end gap-3 pt-2 border-t border-stone-100 mt-2">
+      <div className="flex justify-end gap-3 pt-2 border-t border-slate-100 mt-2">
         <Button type="button" variant="secondary" onClick={() => router.push("/admin/products")}>
           Cancel
         </Button>

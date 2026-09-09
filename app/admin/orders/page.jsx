@@ -41,70 +41,70 @@ export default function AdminOrdersPage() {
   }, [loadOrders]);
 
   return (
-    <div>
-      <div className="mb-5" />
-
-      <div className="flex flex-col sm:flex-row gap-3 mb-5">
-        <input
-          value={search}
-          onChange={(e) => {
-            setPage(1);
-            setSearch(e.target.value);
-          }}
-          placeholder="Search by order #, name, or phone..."
-          className="w-full sm:max-w-xs rounded-lg border border-stone-300 px-3.5 py-2.5 text-sm outline-none focus:ring-2 focus:ring-brand-400"
-        />
-        <select
-          value={status}
-          onChange={(e) => {
-            setPage(1);
-            setStatus(e.target.value);
-          }}
-          className="rounded-lg border border-stone-300 px-3.5 py-2.5 text-sm bg-white outline-none focus:ring-2 focus:ring-brand-400"
-        >
-          <option value="ALL">All Statuses</option>
-          {ORDER_STATUSES.map((s) => (
-            <option key={s} value={s}>{s}</option>
-          ))}
-        </select>
+    <div className="admin-desk">
+      <div className="admin-toolbar">
+        <div className="admin-toolbar-fields">
+          <input
+            value={search}
+            onChange={(e) => {
+              setPage(1);
+              setSearch(e.target.value);
+            }}
+            placeholder="Search order #, name, or phone..."
+            className="admin-field"
+          />
+          <select
+            value={status}
+            onChange={(e) => {
+              setPage(1);
+              setStatus(e.target.value);
+            }}
+            className="admin-field-sm"
+          >
+            <option value="ALL">All statuses</option>
+            {ORDER_STATUSES.map((s) => (
+              <option key={s} value={s}>{s}</option>
+            ))}
+          </select>
+        </div>
       </div>
 
-      {loading ? (
-        <Spinner />
-      ) : orders.length === 0 ? (
-        <EmptyState icon="🧾" title="No orders found" description="Orders will appear here once customers start shopping." />
-      ) : (
-        <>
-          <Table columns={["Order #", "Customer", "Phone", "Items", "Total", "Status", "Date", ""]}>
-            {orders.map((order) => (
-              <tr key={order.id}>
-                <td className="px-4 py-3 font-medium text-stone-800">{order.orderNumber}</td>
-                <td className="px-4 py-3 text-stone-700">{order.customerName}</td>
-                <td className="px-4 py-3 text-stone-600">{order.phone}</td>
-                <td className="px-4 py-3 text-stone-600">{order.items?.length ?? 0}</td>
-                <td className="px-4 py-3 text-stone-700 font-medium">{formatCurrency(order.totalAmount)}</td>
-                <td className="px-4 py-3">
-                  <span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${orderStatusColor(order.status)}`}>
-                    {order.status}
-                  </span>
-                </td>
-                <td className="px-4 py-3 text-stone-500 whitespace-nowrap">{formatDateTime(order.createdAt)}</td>
-                <td className="px-4 py-3">
-                  <div className="flex items-center gap-3 whitespace-nowrap">
-                    <Link href={`/admin/orders/${order.id}`} className="text-sm font-medium text-brand-600 hover:text-brand-800">
-                      View
-                    </Link>
-                    <a href={`/api/orders/${order.id}/receipt`} className="text-sm font-medium text-stone-600 hover:text-stone-800">
-                      Receipt
-                    </a>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </Table>
-          <Pagination page={page} totalPages={totalPages} onChange={setPage} />
-        </>
-      )}
+      <section className="admin-panel">
+        {loading ? (
+          <Spinner />
+        ) : orders.length === 0 ? (
+          <div className="admin-empty">
+            <EmptyState icon="🧾" title="No orders found" description="COD orders will appear here once customers check out." />
+          </div>
+        ) : (
+          <>
+            <Table columns={["Order #", "Customer", "Phone", "Items", "Total", "Status", "Date", ""]}>
+              {orders.map((order) => (
+                <tr key={order.id}>
+                  <td>
+                    <Link href={`/admin/orders/${order.id}`}>{order.orderNumber}</Link>
+                  </td>
+                  <td>{order.customerName}</td>
+                  <td>{order.phone}</td>
+                  <td>{order.items?.length ?? 0}</td>
+                  <td className="font-semibold">{formatCurrency(order.totalAmount)}</td>
+                  <td>
+                    <span className={`admin-status ${orderStatusColor(order.status)}`}>{order.status}</span>
+                  </td>
+                  <td className="admin-muted whitespace-nowrap">{formatDateTime(order.createdAt)}</td>
+                  <td>
+                    <div className="flex items-center gap-3 whitespace-nowrap">
+                      <Link href={`/admin/orders/${order.id}`} className="admin-link">View</Link>
+                      <a href={`/api/orders/${order.id}/receipt`} className="admin-link">Receipt</a>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </Table>
+            <Pagination page={page} totalPages={totalPages} onChange={setPage} />
+          </>
+        )}
+      </section>
     </div>
   );
 }
