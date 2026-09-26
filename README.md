@@ -59,3 +59,15 @@ Customer → Products → Cart (localStorage) → Checkout (COD) → stock decre
 in a transaction → emails → admin dashboard.
 
 Guest checkout only. Cancelling an order restores stock.
+
+## cPanel deploy
+
+Production follows [Next.js + MySQL → cPanel Deployment](https://www.codentree.com/2026/09/nextjs-mysql-cpanel-deployment.html).
+
+Code already includes `server.js`, the Prisma MariaDB adapter, `.github/workflows/deploy.yml`, and `scripts/cpanel-build.sh`. After you create the cPanel MySQL database, Node.js app, SSH key, and GitHub secrets, a push to `main` builds on GitHub and uploads to the server.
+
+Startup file on cPanel must be `server.js`. Production `DATABASE_URL` must use `127.0.0.1:3306` (the server’s own MySQL), not your laptop.
+
+## Module docs
+
+What each part of the site does lives in [`docs/modules/`](docs/modules/). To request a change, open the matching file and write under **Requested changes**. The agent reads that file and implements from it.

@@ -1,0 +1,18 @@
+---
+description: Read docs/modules before changing a feature; implement Requested changes from those files.
+alwaysApply: true
+---
+
+# Module docs are the source of change requests
+
+This repo documents each feature in `docs/modules/`. Index: `docs/modules/README.md`.
+
+When the user asks to change the site, or says they wrote in an MD file:
+
+1. Identify the module (home, products, categories, cart, checkout, blogs, content-pages, admin, auth, api, catalog-db, mail, common-ui, layout-chrome).
+2. Read that file under `docs/modules/` before editing code.
+3. Follow **Rules to keep** unless the requested change explicitly overrides them.
+4. Implement every unchecked `- [ ]` item under **Requested changes** (newest first). Skip the placeholder `_(none)_`.
+5. After shipping, check those items off (`- [x]`) and update **What it does** / **Key files** if behavior or files changed.
+
+If the user describes a change in chat instead of the MD file, still read the module doc, implement, then add a checked item under **Requested changes** so the file stays the history of that module.

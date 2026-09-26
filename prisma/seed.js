@@ -1,8 +1,6 @@
-import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
+import { prisma } from "../lib/db.js";
 import { categories as catalogCategories, products as catalogProducts } from "./catalog.js";
-
-const prisma = new PrismaClient();
 
 function slugify(text) {
   return text
