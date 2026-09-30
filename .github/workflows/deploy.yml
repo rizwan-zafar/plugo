@@ -2,7 +2,7 @@ name: Deploy to cPanel
 
 on:
   push:
-    branches: [backup]
+    branches: [main, backup]
   workflow_dispatch:
 
 concurrency:
@@ -46,7 +46,7 @@ jobs:
           case "$CPANEL_APP_PATH" in
             /home/*) ;;
             *)
-              echo "CPANEL_APP_PATH must be the full cPanel folder, e.g. /home/YOURUSER/plugo"
+              echo "CPANEL_APP_PATH must be the full cPanel folder, e.g. /home/plugocom/plugo"
               echo "A path like /subdomains/... is at the server root and mkdir will fail with Permission denied."
               exit 1
               ;;
@@ -70,10 +70,6 @@ jobs:
         run: |
           npm ci
           npx prisma generate
-          npx prisma migrate diff \
-            --from-empty \
-            --to-schema-datamodel prisma/schema.prisma \
-            --script > prisma/deploy.sql
           NODE_ENV=production npx next build
 
       - name: Pack release
@@ -147,7 +143,7 @@ jobs:
             echo "SSH rejected the key (Permission denied publickey)."
             echo "1. cPanel → SSH Access → Manage Keys → Authorize the PUBLIC key that belongs to this private key"
             echo "2. CPANEL_SSH_KEY must be the matching PRIVATE key"
-            echo "3. CPANEL_USERNAME must be the cPanel user (example: plugo), not an email"
+            echo "3. CPANEL_USERNAME must be the cPanel user (example: plugocom), not an email"
             echo "4. CPANEL_HOST should be the server IP if the domain does not point at SSH yet"
             exit 1
           fi

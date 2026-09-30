@@ -3,22 +3,17 @@ import { parse } from "node:url";
 import next from "next";
 
 const port = Number(process.env.PORT) || 3000;
-const hostname = process.env.HOST || "127.0.0.1";
-const app = next({
-  dev: process.env.NODE_ENV !== "production",
-  hostname,
-  port,
-});
+const hostname = process.env.HOST || process.env.HOSTNAME || "127.0.0.1";
+const app = next({ dev: false, hostname, port });
 const handle = app.getRequestHandler();
 
 app
   .prepare()
   .then(() => {
     createServer((req, res) => {
-      const parsedUrl = parse(req.url, true);
-      handle(req, res, parsedUrl);
+      handle(req, res, parse(req.url, true));
     }).listen(port, hostname, () => {
-      console.log(`Plugo ready on http://${hostname}:${port}`);
+      console.log(`Plugo ready on ${hostname}:${port}`);
     });
   })
   .catch((error) => {

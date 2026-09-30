@@ -60,13 +60,23 @@ in a transaction → emails → admin dashboard.
 
 Guest checkout only. Cancelling an order restores stock.
 
-## cPanel deploy
+## cPanel deploy (same pattern as 11 Number Leather Shoes)
 
-Production follows [Next.js + MySQL → cPanel Deployment](https://www.codentree.com/2026/09/nextjs-mysql-cpanel-deployment.html).
+Keep **two folders**. Do not put the Next app in `public_html`.
 
-Code already includes `server.js`, the Prisma MariaDB adapter, `.github/workflows/deploy.yml`, and `scripts/cpanel-build.sh`. After you create the cPanel MySQL database, Node.js app, SSH key, and GitHub secrets, a push to `main` builds on GitHub and uploads to the server.
+| Role | Path |
+| --- | --- |
+| Application root (Node / GitHub upload) | `/home/plugocom/plugo` |
+| Domain document root (leave this) | `/home/plugocom/public_html` |
+| Application URL | `plugo.pk` (`/`) |
 
-Startup file on cPanel must be `server.js`. Production `DATABASE_URL` must use `127.0.0.1:3306` (the server’s own MySQL), not your laptop.
+**Setup Node.js App:** Node 20, Production, application root `/home/plugocom/plugo`, Application URL = `plugo.pk`, startup file = **`server.js`**. CloudLinux writes Passenger into `public_html/.htaccess` and sets `PORT`.
+
+GitHub **Deploy to cPanel** (`push` to `main` or `backup`): `npm ci` → `prisma generate` → `next build` → upload to `CPANEL_APP_PATH` → write `.env` → restart. No `npm ci` on the server. No table create on deploy — import dumps yourself.
+
+Secrets: `CPANEL_HOST`, `CPANEL_USERNAME` (`plugocom`), `CPANEL_PORT` (`22`), `CPANEL_SSH_KEY`, `CPANEL_SSH_PASSPHRASE` if needed, `CPANEL_APP_PATH` = `/home/plugocom/plugo`, `CPANEL_NODEVENV`, `ENV_DATABASE_URL`, `ENV_AUTH_SECRET`, `ENV_NEXT_PUBLIC_SITE_URL` (`https://plugo.pk`). Optional SMTP secrets. No `CPANEL_PASSWORD`.
+
+`ENV_AUTH_SECRET` is written as `JWT_SECRET`. If Save/Restart says lock, wait. WordPress in `public_html` will break `/_next/` assets.
 
 ## Module docs
 

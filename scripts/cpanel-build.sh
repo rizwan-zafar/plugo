@@ -18,7 +18,7 @@ is_cloudlinux_wrapper() {
 
 if [ -z "$NODEVENV" ]; then
   echo "ERROR: CPANEL_NODEVENV was empty."
-  echo "Expected: /home/YOURUSER/nodevenv/plugo/20/bin/activate"
+  echo "Expected: /home/plugocom/nodevenv/plugo/20/bin/activate"
   exit 1
 fi
 
