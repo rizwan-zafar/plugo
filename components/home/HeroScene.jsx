@@ -54,7 +54,7 @@ export default function HeroScene() {
         <div className="animate-fade-in">
           <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-1.5 text-sm font-medium text-brand-100 mb-6 shadow-[0_0_40px_rgba(34,211,238,0.25)]">
             <span className="h-1.5 w-1.5 rounded-full bg-brand-400 animate-pulse" />
-            Live 3D accessory studio
+            Live 3D accessory studio..
           </span>
           <h1 className="hero-3d-title font-display text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[0.95] mb-6">
             Plug in.
