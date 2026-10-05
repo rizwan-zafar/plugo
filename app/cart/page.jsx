@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { useCart } from "@/components/cart/CartContext";
 import CartItemRow from "@/components/cart/CartItemRow";
 import EmptyState from "@/components/common/EmptyState";
@@ -10,6 +11,15 @@ import { formatCurrency } from "@/lib/utils";
 
 export default function CartPage() {
   const { items, subtotal, hydrated, clearCart } = useCart();
+  const [deliveryCharge, setDeliveryCharge] = useState(0);
+  const grandTotal = subtotal + deliveryCharge;
+
+  useEffect(() => {
+    fetch("/api/settings")
+      .then((res) => res.json())
+      .then((data) => setDeliveryCharge(Number(data.deliveryCharge) || 0))
+      .catch(() => setDeliveryCharge(0));
+  }, []);
 
   if (!hydrated) {
     return (
@@ -63,11 +73,11 @@ export default function CartPage() {
           </div>
           <div className="flex justify-between text-sm text-stone-600 mb-4">
             <span>Delivery</span>
-            <span className="text-green-600 font-medium">Calculated at checkout</span>
+            <span>{deliveryCharge === 0 ? "Free" : formatCurrency(deliveryCharge)}</span>
           </div>
           <div className="border-t border-stone-200 pt-4 flex justify-between font-bold text-stone-800 text-lg mb-6">
             <span>Total</span>
-            <span>{formatCurrency(subtotal)}</span>
+            <span>{formatCurrency(grandTotal)}</span>
           </div>
           <Button as={Link} href="/checkout" size="lg" className="w-full">
             Proceed to Checkout

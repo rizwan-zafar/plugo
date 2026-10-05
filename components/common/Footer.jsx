@@ -45,8 +45,8 @@ export default function Footer() {
           </h4>
           <ul className="space-y-2 text-sm text-slate-400">
             <li>Lahore, Pakistan</li>
-            <li>+92 300 1234567</li>
-            <li>support@plugo.com</li>
+            <li>+92 300 8089585</li>
+            <li>sardarafzalad81@gmail.com</li>
           </ul>
         </div>
       </div>

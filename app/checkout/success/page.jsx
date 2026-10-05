@@ -56,9 +56,23 @@ export default async function CheckoutSuccessPage({ searchParams }) {
           ))}
         </div>
 
-        <div className="border-t border-stone-100 pt-4 flex justify-between font-bold text-stone-800 text-lg mb-5">
-          <span>Total</span>
-          <span>{formatCurrency(plainOrder.totalAmount)}</span>
+        <div className="border-t border-stone-100 pt-4 flex flex-col gap-2 mb-5">
+          <div className="flex justify-between text-sm text-stone-600">
+            <span>Subtotal</span>
+            <span>{formatCurrency(plainOrder.items.reduce((sum, item) => sum + Number(item.subtotal), 0))}</span>
+          </div>
+          <div className="flex justify-between text-sm text-stone-600">
+            <span>Delivery</span>
+            <span>
+              {Number(plainOrder.deliveryCharge || 0) === 0
+                ? "Free"
+                : formatCurrency(plainOrder.deliveryCharge)}
+            </span>
+          </div>
+          <div className="flex justify-between font-bold text-stone-800 text-lg">
+            <span>Total</span>
+            <span>{formatCurrency(plainOrder.totalAmount)}</span>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">

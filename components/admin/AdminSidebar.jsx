@@ -11,6 +11,7 @@ const LINKS = [
   { href: "/admin/orders", label: "Orders", icon: "box" },
   { href: "/admin/blogs", label: "Guides", icon: "note" },
   { href: "/admin/messages", label: "Messages", icon: "mail" },
+  { href: "/admin/settings", label: "Settings", icon: "gear" },
 ];
 
 function NavIcon({ name }) {
@@ -47,6 +48,13 @@ function NavIcon({ name }) {
     return (
       <svg {...common}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M6 4.5h9.5L19.5 8v11.5H6zM15.5 4.5V8H19.5M8.5 12h7M8.5 15.5h5" />
+      </svg>
+    );
+  }
+  if (name === "gear") {
+    return (
+      <svg {...common}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M10.3 3.6h3.4l.5 2.1 1.9.8 2-1.1 2.4 2.4-1.1 2 .8 1.9 2.1.5v3.4l-2.1.5-.8 1.9 1.1 2-2.4 2.4-2-1.1-1.9.8-.5 2.1h-3.4l-.5-2.1-1.9-.8-2 1.1-2.4-2.4 1.1-2-.8-1.9-2.1-.5v-3.4l2.1-.5.8-1.9-1.1-2 2.4-2.4 2 1.1 1.9-.8zM12 15.2A3.2 3.2 0 1 0 12 8.8a3.2 3.2 0 0 0 0 6.4z" />
       </svg>
     );
   }

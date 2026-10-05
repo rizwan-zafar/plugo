@@ -30,14 +30,14 @@ export default function ContactPage() {
             <span className="text-2xl">📞</span>
             <div>
               <h3 className="font-semibold text-ink-900">Phone</h3>
-              <p className="text-sm text-slate-500 mt-1">+92 300 1234567</p>
+              <p className="text-sm text-slate-500 mt-1">+92 300 8089585</p>
             </div>
           </div>
           <div className="rounded-2xl border border-slate-200 bg-white p-6 flex items-start gap-4">
             <span className="text-2xl">✉️</span>
             <div>
               <h3 className="font-semibold text-ink-900">Email</h3>
-              <p className="text-sm text-slate-500 mt-1">support@plugo.com</p>
+              <p className="text-sm text-slate-500 mt-1">sardarafzalad81@gmail.com</p>
             </div>
           </div>
           <div className="rounded-2xl border border-slate-200 bg-white p-6 flex items-start gap-4">

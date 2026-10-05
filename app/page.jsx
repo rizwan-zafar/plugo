@@ -56,9 +56,9 @@ export default async function HomePage() {
             <div>
               <p className="home-kicker">Showroom</p>
               <h2 className="home-heading">Shop the kit</h2>
-              <p className="text-slate-400 mt-2">Five boards. One tap to the accessory you need.</p>
+              <p className="text-slate-600 mt-2">Five boards. One tap to the accessory you need.</p>
             </div>
-            <Link href="/categories" className="hidden sm:inline-flex text-brand-300 font-semibold hover:text-white">
+            <Link href="/categories" className="hidden sm:inline-flex text-brand-700 font-semibold hover:text-ink-900">
               View all →
             </Link>
           </div>
@@ -73,7 +73,7 @@ export default async function HomePage() {
               <div className="cod-copy">
                 <p className="home-kicker">Nationwide</p>
                 <h2 className="home-heading mb-3">Cash on Delivery</h2>
-                <p className="text-slate-300 max-w-md mb-6">
+                <p className="text-slate-600 max-w-md mb-6">
                   No online payment. Order the accessory, keep cash ready, pay when the box lands.
                 </p>
                 <Button as={Link} href="/products" size="lg" className="shadow-[0_18px_40px_rgba(6,182,212,0.45)]">
@@ -92,9 +92,9 @@ export default async function HomePage() {
             <div>
               <p className="home-kicker">On the shelf</p>
               <h2 className="home-heading">Featured accessories</h2>
-              <p className="text-slate-400 mt-2">Lift each piece off the floor — then add it to cart.</p>
+              <p className="text-slate-600 mt-2">Lift each piece off the floor — then add it to cart.</p>
             </div>
-            <Link href="/products" className="hidden sm:inline-flex text-brand-300 font-semibold hover:text-white">
+            <Link href="/products" className="hidden sm:inline-flex text-brand-700 font-semibold hover:text-ink-900">
               View all →
             </Link>
           </div>
@@ -118,9 +118,9 @@ export default async function HomePage() {
               <div>
                 <p className="home-kicker">Field notes</p>
                 <h2 className="home-heading">Guides in depth</h2>
-                <p className="text-slate-400 mt-2">Charge smarter. Connect cleaner.</p>
+                <p className="text-slate-600 mt-2">Charge smarter. Connect cleaner.</p>
               </div>
-              <Link href="/blogs" className="hidden sm:inline-flex text-brand-300 font-semibold hover:text-white">
+              <Link href="/blogs" className="hidden sm:inline-flex text-brand-700 font-semibold hover:text-ink-900">
                 View all →
               </Link>
             </div>
@@ -137,7 +137,7 @@ export default async function HomePage() {
             <div className="relative text-center px-6 py-16 sm:py-20">
               <p className="home-kicker justify-center">Last 1%</p>
               <h2 className="home-heading hero-3d-title mb-4">Ready when your battery isn&apos;t.</h2>
-              <p className="text-slate-300 max-w-xl mx-auto mb-8">
+              <p className="text-slate-600 max-w-xl mx-auto mb-8">
                 Browse cables, adapters, earbuds and handsfree — no signup, Cash on Delivery.
               </p>
               <Button as={Link} href="/products" size="lg" className="shadow-[0_18px_40px_rgba(6,182,212,0.45)]">

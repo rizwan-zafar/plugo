@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/components/cart/CartContext";
@@ -20,6 +20,15 @@ export default function CheckoutPage() {
   const [form, setForm] = useState({ customerName: "", email: "", phone: "", address: "" });
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
+  const [deliveryCharge, setDeliveryCharge] = useState(0);
+  const grandTotal = subtotal + deliveryCharge;
+
+  useEffect(() => {
+    fetch("/api/settings")
+      .then((res) => res.json())
+      .then((data) => setDeliveryCharge(Number(data.deliveryCharge) || 0))
+      .catch(() => setDeliveryCharge(0));
+  }, []);
 
   const handleChange = (e) => {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
@@ -143,7 +152,7 @@ export default function CheckoutPage() {
           </div>
 
           <Button type="submit" size="lg" loading={submitting} className="w-full mt-2">
-            Place Order — {formatCurrency(subtotal)}
+            Place Order — {formatCurrency(grandTotal)}
           </Button>
         </form>
 
@@ -171,9 +180,19 @@ export default function CheckoutPage() {
               </div>
             ))}
           </div>
-          <div className="border-t border-stone-200 mt-4 pt-4 flex justify-between font-bold text-stone-800 text-lg">
-            <span>Total</span>
-            <span>{formatCurrency(subtotal)}</span>
+          <div className="border-t border-stone-200 mt-4 pt-4 flex flex-col gap-2 text-sm text-stone-600">
+            <div className="flex justify-between">
+              <span>Subtotal</span>
+              <span>{formatCurrency(subtotal)}</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Delivery</span>
+              <span>{deliveryCharge === 0 ? "Free" : formatCurrency(deliveryCharge)}</span>
+            </div>
+            <div className="flex justify-between font-bold text-stone-800 text-lg pt-2 border-t border-stone-100">
+              <span>Total</span>
+              <span>{formatCurrency(grandTotal)}</span>
+            </div>
           </div>
         </div>
       </div>

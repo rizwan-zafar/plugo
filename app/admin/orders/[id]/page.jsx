@@ -103,7 +103,19 @@ export default function AdminOrderDetailPage({ params }) {
                 <span className="font-semibold text-ink-900">{formatCurrency(item.subtotal)}</span>
               </div>
             ))}
-            <div className="flex justify-between pt-3 border-t border-slate-100 font-display text-lg font-extrabold text-ink-900">
+            <div className="flex justify-between pt-3 border-t border-slate-100 text-sm text-slate-600">
+              <span>Subtotal</span>
+              <span>{formatCurrency(order.items.reduce((sum, item) => sum + Number(item.subtotal), 0))}</span>
+            </div>
+            <div className="flex justify-between text-sm text-slate-600">
+              <span>Delivery</span>
+              <span>
+                {Number(order.deliveryCharge || 0) === 0
+                  ? "Free"
+                  : formatCurrency(order.deliveryCharge)}
+              </span>
+            </div>
+            <div className="flex justify-between pt-2 font-display text-lg font-extrabold text-ink-900">
               <span>Total</span>
               <span>{formatCurrency(order.totalAmount)}</span>
             </div>

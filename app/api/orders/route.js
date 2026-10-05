@@ -5,6 +5,7 @@ import { generateOrderNumber, toPlain } from "@/lib/utils";
 import { validateCheckout, hasErrors } from "@/lib/validation";
 import { sendOrderEmails } from "@/lib/mail";
 import { syncProductSummary } from "@/lib/product";
+import { getDeliveryCharge } from "@/lib/settings";
 
 export async function GET(request) {
   const session = getAdminSessionFromRequest(request);
@@ -126,6 +127,8 @@ export async function POST(request) {
         await syncProductSummary(tx, productId);
       }
 
+      const deliveryCharge = await getDeliveryCharge(tx);
+
       return tx.order.create({
         data: {
           orderNumber: generateOrderNumber(),
@@ -135,7 +138,8 @@ export async function POST(request) {
           address: data.address.trim(),
           paymentMethod: "COD",
           status: "PENDING",
-          totalAmount: total,
+          deliveryCharge,
+          totalAmount: total + deliveryCharge,
           items: { create: orderItemsData },
         },
         include: { items: true },
