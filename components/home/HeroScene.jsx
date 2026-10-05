@@ -41,7 +41,7 @@ export default function HeroScene() {
   };
 
   return (
-    <section className="hero-3d relative overflow-hidden text-white" onMouseMove={onMove} onMouseLeave={onLeave}>
+    <section className="hero-3d relative overflow-hidden" onMouseMove={onMove} onMouseLeave={onLeave}>
       <div className="hero-3d-aurora" />
       <div className="hero-3d-grid" />
       <div className="hero-3d-particles" aria-hidden="true">
@@ -52,7 +52,7 @@ export default function HeroScene() {
 
       <div className="container-app relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-6 items-center min-h-[88vh] py-16 sm:py-20">
         <div className="animate-fade-in">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-1.5 text-sm font-medium text-brand-100 mb-6 shadow-[0_0_40px_rgba(34,211,238,0.25)]">
+          <span className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-white/80 px-4 py-1.5 text-sm font-medium text-brand-800 mb-6 shadow-[0_0_40px_rgba(34,211,238,0.2)]">
             <span className="h-1.5 w-1.5 rounded-full bg-brand-400 animate-pulse" />
             Live 3D accessory studio..
           </span>
@@ -63,7 +63,7 @@ export default function HeroScene() {
             <br />
             <span className="hero-3d-go">Go.</span>
           </h1>
-          <p className="text-slate-300 text-lg max-w-xl mb-8">
+          <p className="text-slate-600 text-lg max-w-xl mb-8">
             Move the scene. Cables, chargers, earbuds and adapters float in
             depth — shop the kit that keeps every phone ready.
           </p>
@@ -71,7 +71,7 @@ export default function HeroScene() {
             <Button as={Link} href="/products" size="lg" className="shadow-[0_18px_40px_rgba(6,182,212,0.45)]">
               Shop Accessories
             </Button>
-            <Button as={Link} href="/categories" variant="outline" size="lg">
+            <Button as={Link} href="/categories" variant="secondary" size="lg">
               Browse Categories
             </Button>
           </div>

@@ -31,6 +31,7 @@ export default function HomeStandard() {
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
+    if (window.matchMedia("(max-width: 767px)").matches) return undefined;
 
     const verticalQuery = window.matchMedia("(max-width: 899px)");
     let progress = 0;
@@ -75,7 +76,7 @@ export default function HomeStandard() {
   }, []);
 
   return (
-    <section className="std-section">
+    <section className="std-section hidden md:block">
       <div className="container-app">
         <div className="std-hud">
           <p className="std-hud-label">The Plugo standard</p>
